@@ -31,7 +31,7 @@ class Header extends Component {
 		    <img className="logo" src={logo} alt="VegaIT" />
 		    <div className="date-wrap">
 			  <img className="icon" src={calendar} alt="Calendar" />
-			  <time>02 / 08 / 2018</time>
+			  <time>{this.props.date}</time>
 			</div>
 		  </div>
 		</div>
@@ -42,7 +42,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
 	return {
-	
+		date: state.date
 	}
 }
 

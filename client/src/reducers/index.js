@@ -26,7 +26,16 @@ const allReducers = (state = initState, action) => {
                 ...state.todos.slice(0, 0),
                 newTODO,
                 ...state.todos.slice(0),
-            ],
+               ],
+            }
+        case 'REMOVE_TODO':
+            let newTODOs = state.todos.filter(todo => {
+              return todo.id != action.payload // ne !==
+            });
+            
+            return {
+              ...state,
+              todos: newTODOs
             }
         default:
             return state;

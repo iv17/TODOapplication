@@ -10,3 +10,10 @@ export const create = (content) => {
         payload: content
     }
 };
+
+export const remove = (id) => {
+    return {
+        type: 'REMOVE_TODO',
+        payload: id
+    }
+};
