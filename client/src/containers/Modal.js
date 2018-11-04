@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Modal extends Component {
   render() {
-	  const showHideClassName = this.props.show ? "modal-wrap is-visible js-modal" : "modal-wrap js-modal";
+	  const showHideClassName = this.props.isOpen ? "modal-wrap is-visible js-modal" : "modal-wrap js-modal";
 	  return (
 	    <div className={showHideClassName}>
 	      <div className="modal js-modal-inner">
@@ -21,4 +22,10 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+function mapStateToProps(state) {
+	return {
+			isOpen: state.isOpen
+	};
+}
+
+export default connect(mapStateToProps)(Modal);
