@@ -5,10 +5,13 @@ import calendar from '../icons/icon-calendar.svg';
 import Modal from './Modal';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {openModal} from '../actions/index';
+import {onLoad, openModal} from '../actions/index';
 
 class Header extends Component {
-  
+
+  componentDidMount() {
+		this.props.onLoad();
+	}
   handleChange = (e) => {
 		e.preventDefault();
 		this.props.openModal()
@@ -22,8 +25,8 @@ class Header extends Component {
 		    <img className="icon icon-plus js-modal-init" onClick={this.handleChange} src={plus} alt="Add New Item" />
 		  </span>
 		  <div className="header-blockquote">
-		    <h1 className="header-quote">Happiness is good health and a bad memory</h1>
-		  	<div className="header-cite">- Ingrid Bergman</div>
+		    <h1 className="header-quote">{ this.props.quote.content }</h1>
+		  	<div className="header-cite">- { this.props.quote.author }</div>
 		  </div>
 		</div>
 		<div className="header-inner">
@@ -42,13 +45,14 @@ class Header extends Component {
 
 function mapStateToProps(state) {
 	return {
+		quote: state.quote,
 		date: state.date
 	}
 }
 
 function matchDispatchToProps(dispatch) {
 	return {
-		...bindActionCreators({ openModal: openModal }, dispatch)
+		...bindActionCreators({ onLoad: onLoad, openModal: openModal }, dispatch)
 	}
 }
 

@@ -1,3 +1,8 @@
+export const onLoad = () => {
+    return {
+        type: 'ON_LOAD'
+    }
+};
 export const openModal = () => {
     return {
         type: 'OPEN_MODAL',

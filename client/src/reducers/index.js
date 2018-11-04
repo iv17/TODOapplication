@@ -1,3 +1,6 @@
+import quotes from '../quotes.json';
+import {getCurrentDate, random_item} from '../helper';
+
 const initState = {
     todos: [ 
         { id: 1, content: 'Pick up drycleaning' },
@@ -5,22 +8,30 @@ const initState = {
         { id: 3, content: 'Drink beer' }
     ],
     isOpen: false,
-    //content: ''
+    quote:  {},
+    date: ''
 }
 
 const allReducers = (state = initState, action) => {
     switch (action.type) {
+        case 'ON_LOAD':
+            return {
+                ...state,
+                quote: random_item(quotes),
+                date: getCurrentDate()
+            }
         case 'OPEN_MODAL':
             return {
                 ...state,
-                isOpen: action.payload
+                isOpen: action.payload,
+                quote: random_item(quotes),
+                date: getCurrentDate()
             } 
         case 'CREATE_TODO':
             var newTODO = { id: state.todos.length + 1, content: action.payload }
             return {
                ...state,
                isOpen: false,
-               //content: '',
                //todos : [...state.todos, newTODO]
                todos: [
                 ...state.todos.slice(0, 0),
