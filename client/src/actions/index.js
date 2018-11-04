@@ -4,3 +4,9 @@ export const openModal = () => {
         payload: true
     }
 };
+export const create = (content) => {
+    return {
+        type: 'CREATE_TODO',
+        payload: content
+    }
+};
