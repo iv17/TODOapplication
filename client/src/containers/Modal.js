@@ -47,8 +47,7 @@ class Modal extends Component {
 
 function mapStateToProps(state) {
 	return {
-			isOpen: state.isOpen,
-			content: state.content
+			isOpen: state.isOpen
 	};
 }
 

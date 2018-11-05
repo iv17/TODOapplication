@@ -15,6 +15,13 @@ export function getCurrentDate() {
     return today = dd + ' / ' + mm + ' / ' + yyyy;
 }
 
-export function random_item(items) {
+export function getRandomItem(items) {
     return items[Math.floor(Math.random()*items.length)];       
-  }
+}
+
+export function getAllByDate(todos) {
+    var date = getCurrentDate();
+    return todos.filter(todo => {
+        return todo.date === date;
+    });
+}

@@ -5,8 +5,7 @@ export const onLoad = () => {
 };
 export const openModal = () => {
     return {
-        type: 'OPEN_MODAL',
-        payload: true
+        type: 'OPEN_MODAL'
     }
 };
 export const create = (content) => {
