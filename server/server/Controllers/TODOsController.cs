@@ -21,5 +21,19 @@ namespace server.Controllers
         {
             return Ok(todos);
         }
+
+        public IHttpActionResult Post([FromBody] dynamic value)
+        {
+            TODO newTODO = new TODO { Id = todos.Count, Content = value.content, Date = DateTime.Now };
+            todos.Add(newTODO);
+            return Ok(newTODO);
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var todo = todos.FirstOrDefault((p) => p.Id == id);
+            todos.Remove(todo);
+            return Ok(todos);
+        }
     }
 }

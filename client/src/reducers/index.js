@@ -24,7 +24,7 @@ const combinedReducers = (state = initState, action) => {
                 isOpen: true
             } 
         case 'CREATE_TODO':
-            var newTODO = { id: state.todos.length + 1, content: action.payload, date: getCurrentDate() }
+            var newTODO = action.payload;
             return {
                ...state,
                isOpen: false,
@@ -36,13 +36,13 @@ const combinedReducers = (state = initState, action) => {
                ],
             }
         case 'REMOVE_TODO':
-            let newTODOs = state.todos.filter(todo => {
-              return todo.id != action.payload // ne !==
-            });
+            /*let newTODOs = state.todos.filter(todo => {
+              return todo.Id != action.payload.Id // ne !==
+            });*/
             
             return {
               ...state,
-              todos: newTODOs
+              todos: action.payload
             }
         default:
             return state;

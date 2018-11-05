@@ -20,21 +20,47 @@ export const onLoadSuccess = (todos) => {
         payload: todos
     }
 };
+
 export const openModal = () => {
     return {
         type: 'OPEN_MODAL'
     }
 };
-export const create = (content) => {
+
+export const create = content => {
+    return (dispatch) => {
+      return axios.post(apiUrl, {'content': content} )
+        .then(response => {
+          dispatch(createSuccess(response.data))
+        })
+        .catch(error => {
+          throw(error);
+        });
+    };
+}; 
+
+export const createSuccess = (content) => {
     return {
         type: 'CREATE_TODO',
         payload: content
     }
 };
 
-export const remove = (id) => {
+export const remove = id => {
+    return (dispatch) => {
+      return axios.delete(apiUrl + '/' + id)
+        .then(response => {
+          dispatch(removeSuccess(response.data))
+        })
+        .catch(error => {
+          throw(error);
+        });
+    };
+};
+
+export const removeSuccess = (todos) => {
     return {
         type: 'REMOVE_TODO',
-        payload: id
+        payload: todos
     }
 };
