@@ -18,12 +18,12 @@ class TODOs extends Component {
 		return this.props.todos.map((todo) => {
 				return (
 
-					<div className="item-row" key={todo.id}>
+					<div className="item-row" key={todo.Id}>
 						<label className="check-flag">
-							<span className="check-flag-label">{ todo.content }</span>
+							<span className="check-flag-label">{ todo.Content }</span>
 							<span className="checkbox">
 							 <input className="checkbox-native" type="checkbox" 
-							  key={ todo.id } value={ todo.id } 
+							  key={ todo.Id } value={ todo.Id } 
 							  onChange={ this.handleClick }/>
 							<span className="checkmark">
 							<svg viewBox="0 0 24 24">

@@ -1,13 +1,7 @@
 /* eslint eqeqeq: "off", curly: "error" */
 import quotes from '../quotes.json';
-import {getCurrentDate, getRandomItem, getAllByDate} from '../helper';
+import {getCurrentDate, getRandomItem} from '../helper';
 
-const alltodos = [ 
-    { id: 1, content: 'Pick up drycleaning', date: "05 / 11 / 2018" },
-    { id: 2, content: 'Study for exam', date: "05 / 11 / 2018" },
-    { id: 3, content: 'Drink beer', date: "05 / 11 / 2018" },
-    { id: 4, content: 'Drink beer 2', date: "06 / 11 / 2018" }
-]
 const initState = {
     todos: [],
     isOpen: false,
@@ -20,7 +14,7 @@ const combinedReducers = (state = initState, action) => {
         case 'ON_LOAD':
             return {
                 ...state,
-                todos: getAllByDate(alltodos),
+                todos: action.payload,
                 quote: getRandomItem(quotes),
                 date: getCurrentDate()
             }

@@ -1,6 +1,23 @@
+const apiUrl = 'http://localhost:8080/api/todos';
+
+const axios = require('axios');
+
 export const onLoad = () => {
+    return (dispatch) => {
+        return axios.get(apiUrl)
+        .then(response => {
+          dispatch(onLoadSuccess(response.data))
+        })
+        .catch(error => {
+          throw(error);
+        });
+    };
+};
+
+export const onLoadSuccess = (todos) => {
     return {
-        type: 'ON_LOAD'
+        type: 'ON_LOAD',
+        payload: todos
     }
 };
 export const openModal = () => {
