@@ -30,7 +30,7 @@ const combinedReducers = (state = initState, action) => {
                 isOpen: true
             } 
         case 'CREATE_TODO':
-            var newTODO = { id: state.todos.length + 1, content: action.payload }
+            var newTODO = { id: state.todos.length + 1, content: action.payload, date: getCurrentDate() }
             return {
                ...state,
                isOpen: false,
