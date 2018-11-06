@@ -25,11 +25,12 @@ const allReducers = (state = initState, action) => {
             return {
                ...state,
                isOpen: false,
-               todos: [
+               todos : [...state.todos, action.payload]
+               /*todos: [
                 ...state.todos.slice(0, 0),
                 action.payload,
                 ...state.todos.slice(0),
-               ],
+               ],*/
             }
         case 'REMOVE_TODO':
             /*let newTODOs = state.todos.filter(todo => {

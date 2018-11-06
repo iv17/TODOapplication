@@ -20,10 +20,10 @@ namespace server.Repositories
 
         public TODO Add(TODO tODO)
         {
-            Task<TODO> task = Task<TODO>.Factory.StartNew(() =>
+            Task<TODO> task = Task<TODO>.Run(async () =>
             {
                 db.TODOes.Add(tODO);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 return tODO;
             });
@@ -32,7 +32,7 @@ namespace server.Repositories
 
         public DbSet<TODO> Delete(int id)
         {
-            Task<DbSet<TODO>> task = Task<DbSet<TODO>>.Factory.StartNew( () =>
+            Task<DbSet<TODO>> task = Task<DbSet<TODO>>.Run(async () =>
             {
                 TODO tODO = db.TODOes.Find(id);
 
@@ -41,7 +41,7 @@ namespace server.Repositories
                     return null;
                 }
                 db.TODOes.Remove(tODO);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 return db.TODOes;
 
