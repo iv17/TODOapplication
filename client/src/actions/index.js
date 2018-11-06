@@ -1,13 +1,12 @@
 import {getCurrentDate} from '../helper';
 
-const apiUrl = 'http://localhost:8080/api/todo';
+const apiUrl = 'http://localhost:8080/api/todos';
 
 const axios = require('axios');
 
 var date = getCurrentDate();
 export const onLoad = () => {
     return (dispatch) => {
-        //return axios.get(apiUrl)
         return axios.get(apiUrl + "?date=" + date)
         .then(response => {
           dispatch(onLoadSuccess(response.data))

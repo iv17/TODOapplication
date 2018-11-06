@@ -27,9 +27,3 @@ export function getCurrentDate() {
 export function getRandomItem(items) {
     return items[Math.floor(Math.random()*items.length)];       
 }
-
-export function filterTODOs(todos) {
-    return todos.filter(todo => {
-        return todo.Finished === false 
-      });
-}

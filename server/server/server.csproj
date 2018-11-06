@@ -97,14 +97,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TODOController.cs" />
     <Compile Include="Controllers\TODOsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811060045323_Initial.cs" />
-    <Compile Include="Migrations\201811060045323_Initial.Designer.cs">
-      <DependentUpon>201811060045323_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201811061317191_Initial.cs" />
+    <Compile Include="Migrations\201811061317191_Initial.Designer.cs">
+      <DependentUpon>201811061317191_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\serverContext.cs" />
@@ -124,8 +123,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811060045323_Initial.resx">
-      <DependentUpon>201811060045323_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811061317191_Initial.resx">
+      <DependentUpon>201811061317191_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

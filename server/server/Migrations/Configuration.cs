@@ -28,9 +28,9 @@ namespace server.Migrations
             //    );
             //
             context.TODOes.AddOrUpdate(t => t.Id,
-                new TODO { Id = 0, Content = "Pick up drycleaning", Date = DateTime.Today, Finished = false },
-                new TODO { Id = 1, Content = "Study for exam", Date = DateTime.Today, Finished = false },
-                new TODO { Id = 2, Content = "Drink beer", Date = DateTime.Today, Finished = false });
+                new TODO { Content = "Pick up drycleaning", Date = DateTime.Today },
+                new TODO { Content = "Study for exam", Date = DateTime.Today},
+                new TODO { Content = "Drink beer", Date = DateTime.Today });
             }
     
     }

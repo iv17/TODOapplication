@@ -14,7 +14,6 @@ namespace server.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Content = c.String(nullable: false),
                         Date = c.DateTime(nullable: false),
-                        Finished = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

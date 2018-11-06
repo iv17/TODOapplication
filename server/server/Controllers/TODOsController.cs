@@ -1,68 +1,57 @@
-﻿using server.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Description;
+using server.Models;
 
 namespace server.Controllers
 {
     [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class TODOsController : ApiController
     {
-        private List<TODO> todos;
-        
-        public TODOsController()
-        {
-            todos = new List<TODO> {
-                new TODO { Id = 0, Content = "Pick up drycleaning", Date = DateTime.Today, Finished = false },
-                new TODO { Id = 1, Content = "Study for exam", Date = DateTime.Today, Finished = false },
-                new TODO { Id = 2, Content = "Drink beer", Date = DateTime.Today, Finished = false }
-            };
-            //var session = HttpContext.Current.Session;
-            //session["todos"] = todos;
-        }
-        
-        public IHttpActionResult Get([FromUri] string date)
+        private serverContext db = new serverContext();
+
+        // GET: api/TODO
+        public IHttpActionResult GetTODOes([FromUri] string date)
         {
             List<TODO> todayTodos = new List<TODO>();
-            foreach (TODO todo in todos)
+            foreach (TODO tODO in db.TODOes)
             {
-                string todoDate = todo.Date.Day + "/" + todo.Date.Month + "/" + todo.Date.Year;
+                string todoDate = tODO.Date.Day + "/" + tODO.Date.Month + "/" + tODO.Date.Year;
                 if (todoDate.Equals(date))
                 {
-                    todayTodos.Add(todo);
+                    todayTodos.Add(tODO);
                 }
             }
-
-            var session = HttpContext.Current.Session;
-
-            session["todos"] = todayTodos;
-            todos = (List<TODO>) session["todos"];
-            return Ok(todos);
+            return Ok(db.TODOes);
         }
 
-        public IHttpActionResult Post([FromBody] dynamic value)
+        public async Task<IHttpActionResult> PostTODO([FromBody] dynamic value)
         {
-            var session = HttpContext.Current.Session;
-            List<TODO> todos = (List<TODO>) session["todos"];
-            TODO newTODO = new TODO { Id = todos.Count, Content = value.content, Date = DateTime.Today, Finished = false };
-            todos.Add(newTODO);
-            session["todos"] = todos;
-            return Ok(newTODO);
+            TODO tODO = new TODO {Content = value.content, Date = DateTime.Today };
+            db.TODOes.Add(tODO);
+            await db.SaveChangesAsync();
+
+            return Ok(tODO);
         }
 
-        public IHttpActionResult Delete(int id)
+        // DELETE: api/TODO/5
+        [ResponseType(typeof(TODO))]
+        public async Task<IHttpActionResult> DeleteTODO(int id)
         {
-            var session = HttpContext.Current.Session;
-            List<TODO> todos = (List<TODO>) session["todos"];
-            TODO todo = todos.FirstOrDefault((p) => p.Id == id);
-            todo.Finished = true;
-            session["todos"] = todos;
-            return Ok(todos);
+            TODO tODO = await db.TODOes.FindAsync(id);
+            if (tODO == null)
+            {
+                return NotFound();
+            }
+
+            db.TODOes.Remove(tODO);
+            await db.SaveChangesAsync();
+
+            return Ok(tODO);
         }
+
     }
 }

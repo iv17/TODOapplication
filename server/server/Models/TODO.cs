@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
     public class TODO
     {
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -16,9 +15,6 @@ namespace server.Models
 
         [Required]
         public DateTime Date { get; set; }
-
-        [Required]
-        public bool Finished { get; set; }
 
     }
 }
