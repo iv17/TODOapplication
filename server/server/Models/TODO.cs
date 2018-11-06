@@ -17,5 +17,8 @@ namespace server.Models
         [Required]
         public DateTime Date { get; set; }
 
+        [Required]
+        public bool Finished { get; set; }
+
     }
 }

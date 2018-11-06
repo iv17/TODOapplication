@@ -1,10 +1,13 @@
-const apiUrl = 'http://localhost:8080/api/todos';
+import {getCurrentDate} from '../helper';
+
+const apiUrl = 'http://localhost:8080/(S(grbatn5bf5mhesxsqbqlppzt))/api/todos';
 
 const axios = require('axios');
 
+var date = getCurrentDate();
 export const onLoad = () => {
     return (dispatch) => {
-        return axios.get(apiUrl)
+        return axios.get(apiUrl + "?date=" + date)
         .then(response => {
           dispatch(onLoadSuccess(response.data))
         })
@@ -27,7 +30,7 @@ export const openModal = () => {
     }
 };
 
-export const create = content => {
+export const create = (content) => {
     return (dispatch) => {
       return axios.post(apiUrl, {'content': content} )
         .then(response => {
@@ -46,7 +49,7 @@ export const createSuccess = (content) => {
     }
 };
 
-export const remove = id => {
+export const remove = (id) => {
     return (dispatch) => {
       return axios.delete(apiUrl + '/' + id)
         .then(response => {

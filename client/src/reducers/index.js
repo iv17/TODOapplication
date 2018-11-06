@@ -1,6 +1,6 @@
 /* eslint eqeqeq: "off", curly: "error" */
 import quotes from '../quotes.json';
-import {getCurrentDate, getRandomItem} from '../helper';
+import {getCurrentDate0, getRandomItem, filterTODOs} from '../helper';
 
 const initState = {
     todos: [],
@@ -14,9 +14,9 @@ const combinedReducers = (state = initState, action) => {
         case 'ON_LOAD':
             return {
                 ...state,
-                todos: action.payload,
+                todos: filterTODOs(action.payload),
                 quote: getRandomItem(quotes),
-                date: getCurrentDate()
+                date: getCurrentDate0()
             }
         case 'OPEN_MODAL':
             return {
@@ -42,7 +42,7 @@ const combinedReducers = (state = initState, action) => {
             
             return {
               ...state,
-              todos: action.payload
+              todos: filterTODOs(action.payload)
             }
         default:
             return state;

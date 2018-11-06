@@ -17,7 +17,7 @@ class TODOs extends Component {
 	renderList = () => {
 		return this.props.todos.map((todo) => {
 			return (
-
+			
 				<div className="item-row" key={todo.Id}>
 					<label className="check-flag">
 						<span className="check-flag-label">{todo.Content}</span>

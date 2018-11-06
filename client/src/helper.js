@@ -1,4 +1,4 @@
-export function getCurrentDate() {
+export function getCurrentDate0() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
@@ -15,13 +15,21 @@ export function getCurrentDate() {
     return today = dd + ' / ' + mm + ' / ' + yyyy;
 }
 
+export function getCurrentDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    return today = dd + '/' + mm + '/' + yyyy;
+}
+
 export function getRandomItem(items) {
     return items[Math.floor(Math.random()*items.length)];       
 }
 
-export function getAllByDate(todos) {
-    var date = getCurrentDate();
+export function filterTODOs(todos) {
     return todos.filter(todo => {
-        return todo.date === date;
-    });
+        return todo.Finished === false 
+      });
 }
