@@ -5,8 +5,8 @@ import {getCurrentDate0, getRandomItem, filterTODOs} from '../helper';
 const initState = {
     todos: [],
     isOpen: false,
-    quote:  {},
-    date: ''
+    quote: getRandomItem(quotes),
+    date: getCurrentDate0()
 }
 
 const combinedReducers = (state = initState, action) => {
@@ -15,8 +15,6 @@ const combinedReducers = (state = initState, action) => {
             return {
                 ...state,
                 todos: filterTODOs(action.payload),
-                quote: getRandomItem(quotes),
-                date: getCurrentDate0()
             }
         case 'OPEN_MODAL':
             return {
@@ -36,13 +34,13 @@ const combinedReducers = (state = initState, action) => {
                ],
             }
         case 'REMOVE_TODO':
-            /*let newTODOs = state.todos.filter(todo => {
+            let newTODOs = state.todos.filter(todo => {
               return todo.Id != action.payload.Id // ne !==
-            });*/
+            });
             
             return {
               ...state,
-              todos: filterTODOs(action.payload)
+              todos: newTODOs
             }
         default:
             return state;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Routing;
-using System.Web.SessionState;
+﻿using System.Web.Http;
 
 namespace server
 {
@@ -15,10 +9,5 @@ namespace server
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
-        protected void Application_PostAuthorizeRequest()
-        {
-            HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
-
-        }
     }
 }

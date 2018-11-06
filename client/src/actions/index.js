@@ -1,12 +1,13 @@
 import {getCurrentDate} from '../helper';
 
-const apiUrl = 'http://localhost:8080/(S(grbatn5bf5mhesxsqbqlppzt))/api/todos';
+const apiUrl = 'http://localhost:8080/api/todo';
 
 const axios = require('axios');
 
 var date = getCurrentDate();
 export const onLoad = () => {
     return (dispatch) => {
+        //return axios.get(apiUrl)
         return axios.get(apiUrl + "?date=" + date)
         .then(response => {
           dispatch(onLoadSuccess(response.data))
@@ -61,9 +62,9 @@ export const remove = (id) => {
     };
 };
 
-export const removeSuccess = (todos) => {
+export const removeSuccess = (todo) => {
     return {
         type: 'REMOVE_TODO',
-        payload: todos
+        payload: todo
     }
 };
