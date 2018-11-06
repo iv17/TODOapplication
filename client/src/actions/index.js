@@ -61,9 +61,9 @@ export const remove = (id) => {
     };
 };
 
-export const removeSuccess = (todo) => {
+export const removeSuccess = (todos) => {
     return {
         type: 'REMOVE_TODO',
-        payload: todo
+        payload: todos
     }
 };

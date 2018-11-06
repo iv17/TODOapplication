@@ -22,25 +22,23 @@ const allReducers = (state = initState, action) => {
                 isOpen: true
             } 
         case 'CREATE_TODO':
-            var newTODO = action.payload;
             return {
                ...state,
                isOpen: false,
-               //todos : [...state.todos, newTODO]
                todos: [
                 ...state.todos.slice(0, 0),
-                newTODO,
+                action.payload,
                 ...state.todos.slice(0),
                ],
             }
         case 'REMOVE_TODO':
-            let newTODOs = state.todos.filter(todo => {
+            /*let newTODOs = state.todos.filter(todo => {
               return todo.Id != action.payload.Id // ne !==
-            });
+            });*/
             
             return {
               ...state,
-              todos: newTODOs
+              todos: action.payload
             }
         default:
             return state;

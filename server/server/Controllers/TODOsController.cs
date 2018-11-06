@@ -1,56 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using server.DTOs;
+using server.Helpers;
 using server.Models;
+using server.Services;
 
 namespace server.Controllers
 {
     [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class TODOsController : ApiController
     {
-        private serverContext db = new serverContext();
+        private TODOsService service;
+        private Converter converter;
 
-        // GET: api/TODO
-        public IHttpActionResult GetTODOes([FromUri] string date)
+        public TODOsController()
         {
-            List<TODO> todayTodos = new List<TODO>();
-            foreach (TODO tODO in db.TODOes)
-            {
-                string todoDate = tODO.Date.Day + "/" + tODO.Date.Month + "/" + tODO.Date.Year;
-                if (todoDate.Equals(date))
-                {
-                    todayTodos.Add(tODO);
-                }
-            }
-            return Ok(db.TODOes);
+            service = new TODOsService();
+            converter = new Converter();
         }
 
-        public async Task<IHttpActionResult> PostTODO([FromBody] dynamic value)
+        // GET: api/TODO
+        public IHttpActionResult Get([FromUri] string date)
         {
-            TODO tODO = new TODO {Content = value.content, Date = DateTime.Today };
-            db.TODOes.Add(tODO);
-            await db.SaveChangesAsync();
+            List<TODO> todos = service.FindAll();
 
-            return Ok(tODO);
+            return Ok(converter.Convert(todos));
+        }
+
+        public IHttpActionResult Post([FromBody] dynamic value)
+        {
+            string content = value.content;
+
+            return Ok(converter.Convert(service.Add(content)));
         }
 
         // DELETE: api/TODO/5
         [ResponseType(typeof(TODO))]
-        public async Task<IHttpActionResult> DeleteTODO(int id)
+        public IHttpActionResult Delete(int id)
         {
-            TODO tODO = await db.TODOes.FindAsync(id);
-            if (tODO == null)
-            {
-                return NotFound();
-            }
-
-            db.TODOes.Remove(tODO);
-            await db.SaveChangesAsync();
-
-            return Ok(tODO);
+            return Ok(converter.Convert(service.Delete(id)));
         }
 
     }
