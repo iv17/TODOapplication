@@ -1,6 +1,6 @@
 import {getCurrentDate} from '../helper';
 
-const apiUrl = 'http://localhost:8080/(S(grbatn5bf5mhesxsqbqlppzt))/api/todos';
+const apiUrl = 'http://localhost:8080/' + 'sessionID' + '/api/todos';
 
 const axios = require('axios');
 
