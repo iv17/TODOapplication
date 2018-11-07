@@ -2,18 +2,16 @@ namespace server.Migrations
 {
     using server.Models;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<server.Models.serverContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<server.Models.TODOsContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(server.Models.serverContext context)
+        protected override void Seed(server.Models.TODOsContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -7,7 +7,12 @@ using System.Web;
 
 namespace server.Helpers
 {
-    public class Converter
+    public interface IConverter
+    {
+        TODOdTO Convert(TODO todo);
+        List<TODOdTO> Convert(List<TODO> todos);
+    }
+    public class Converter : IConverter
     {
         public TODOdTO Convert(TODO todo)
         {

@@ -4,14 +4,16 @@ using System.Threading.Tasks;
 
 namespace server.Repositories
 {
-    public class TODOsRepository
+    public interface ITODOsRepository
     {
-        private serverContext db;
+        DbSet<TODO> FindAll();
+        TODO Add(TODO tODO);
+        DbSet<TODO> Delete(int id);
 
-        public TODOsRepository()
-        {
-            db = new serverContext();
-        }
+    }
+    public class TODOsRepository : ITODOsRepository
+    {
+        private TODOsContext db = new TODOsContext();
 
         public DbSet<TODO> FindAll()
         {

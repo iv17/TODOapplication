@@ -2,7 +2,6 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
-using server.DTOs;
 using server.Helpers;
 using server.Models;
 using server.Services;
@@ -12,13 +11,13 @@ namespace server.Controllers
     [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class TODOsController : ApiController
     {
-        private TODOsService service;
-        private Converter converter;
+        private ITODOsService service;
+        private IConverter converter;
 
-        public TODOsController()
+        public TODOsController(ITODOsService iservice, IConverter iconverter)
         {
-            service = new TODOsService();
-            converter = new Converter();
+            service = iservice;
+            converter = iconverter; 
         }
 
         // GET: api/TODO

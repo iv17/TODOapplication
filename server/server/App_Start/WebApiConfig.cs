@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using server.DI;
+using server.Helpers;
+using server.Repositories;
+using server.Services;
 using System.Web.Http;
+using Unity;
+using Unity.Lifetime;
 
 namespace server
 {
@@ -20,6 +23,12 @@ namespace server
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var container = new UnityContainer();
+            container.RegisterType<ITODOsRepository, TODOsRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<ITODOsService, TODOsService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IConverter, Converter>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
         }
     }
 }

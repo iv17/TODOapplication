@@ -6,13 +6,19 @@ using System.Linq;
 
 namespace server.Services
 {
-    public class TODOsService
+    public interface ITODOsService
     {
-        private TODOsRepository repository;
+        List<TODO> FindAll();
+        TODO Add(string content);
+        List<TODO> Delete(int id);
+    }
+    public class TODOsService : ITODOsService
+    {
+        private ITODOsRepository repository;
 
-        public TODOsService()
+        public TODOsService(TODOsRepository irepository)
         {
-            repository = new TODOsRepository();
+            repository = irepository;
         }
 
         public List<TODO> FindAll()
